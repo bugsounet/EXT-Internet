@@ -1,0 +1,13 @@
+#EXT_INTERNET {
+  font-size: large;
+  display: flex;
+  line-height: 1.5em;
+}
+
+#EXT_INTERNET.hidden {
+  display: none;
+}
+
+#EXT_INTERNET_TEXT {
+  margin-right: 10px;
+}
