@@ -1,0 +1,5 @@
+{
+  "InternetDown" : "{VALUES}, Internet ist nicht erreichbar!",
+  "InternetRestart": "Internet ist jetzt verfügbar! Starte MagicMirror neu…",
+  "InternetAvailable": "Internet ist jetzt verfügbar, nach {VALUES}"
+}

@@ -33,18 +33,25 @@ Module.register("EXT-Internet", {
       second: " " + this.translate("SECOND"),
       seconds: " " + this.translate("SECONDS")
     }
-    //console.log(typeof(EXT_Notification) == "function" ? "ok" :" nok")
-  },
-
-  getScripts: function() {
-    return [ ]
   },
 
   getStyles: function () {
     return [
-      "EXT-Internet.css",
-      "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      "EXT-Internet.css"
     ]
+  },
+
+  getTranslations: function() {
+    return {
+      en: "translations/en.json",
+      fr: "translations/fr.json",
+      it: "translations/it.json",
+      de: "translations/de.json",
+      es: "translations/es.json",
+      nl: "translations/nl.json",
+      pt: "translations/pt.json",
+      ko: "translations/ko.json"
+    }
   },
 
   getDom: function() {
@@ -77,27 +84,48 @@ Module.register("EXT-Internet", {
     switch(noti) {
       /** new internet module (v2) **/
       case "INTERNET_DOWN":
-        if (payload.ticks == 1) this.sendSocketNotification("SCREEN_WAKEUP")
+        if (payload.ticks == 1) this.sendSocketNotification("EXT_SCREEN-WAKEUP")
         let FormatedSince = moment(payload.date).fromNow()
-        //this.Informations("warning", { message: "InternetDown", values: FormatedSince})
+        this.sendNotification("EXT_ALERT", {
+          type: "warning",
+          message: this.translate("InternetDown", { VALUES: FormatedSince }),
+          icon: "modules/EXT-Internet/resources/Internet-Logo.png",
+          timer: 10000
+        })
         break
       case "INTERNET_RESTART":
-        //this.sendSocketNotification("SCREEN_WAKEUP")
-        //this.Informations("information", { message: "InternetRestart" })
+        this.sendSocketNotification("EXT_SCREEN-WAKEUP")
+        this.sendNotification("EXT_ALERT", {
+          type: "information",
+          message: this.translate("InternetRestart")
+        })
         break
       case "INTERNET_AVAILABLE":
         let DateDiff = payload
-        //this.sendSocketNotification("SCREEN_WAKEUP")
+        this.sendSocketNotification("EXT_SCREEN-WAKEUP")
         // sport time ! translate the time elapsed since no internet into all languages !!!
         let FormatedMessage = (DateDiff.day ? (DateDiff.day + (DateDiff.day > 1 ? this.DateTranslate.days : this.DateTranslate.day)) : "")
           + (DateDiff.hour ? (DateDiff.hour + (DateDiff.hour > 1 ? this.DateTranslate.hours : this.DateTranslate.hour)): "")
           + (DateDiff.min ? (DateDiff.min + (DateDiff.min > 1 ? this.DateTranslate.minutes : this.DateTranslate.minute)): "")
           + DateDiff.sec + (DateDiff.sec > 1 ? this.DateTranslate.seconds : this.DateTranslate.second)
-        //this.Informations("information", { message: "InternetAvailable", values: FormatedMessage })
+        this.sendNotification("EXT_ALERT", {
+          type: "information",
+          message: this.translate("InternetAvailable", { VALUES: FormatedMessage }),
+          icon: "modules/EXT-Internet/resources/Internet-Logo.png",
+          timer: 10000
+        })
         break
       case "INTERNET_PING":
         var ping = document.getElementById("EXT_INTERNET_PING")
         ping.textContent = payload
+        break
+      case "WARNING":
+        this.sendSocketNotification("EXT_SCREEN-WAKEUP")
+        this.sendNotification("EXT_ALERT", {
+          type: "error",
+          message: payload,
+          timer: 10000
+        })
         break
     }   
   },

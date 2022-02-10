@@ -1,0 +1,5 @@
+{
+  "InternetDown" : "{VALUES}, 인터넷 연결이 끊겼습니다!",
+  "InternetRestart": "인터넷이 연결되었습니다! MagicMirror를 다시 시작하는중...",
+  "InternetAvailable": "인터넷이 연결되었습니다, after {VALUES}"
+}

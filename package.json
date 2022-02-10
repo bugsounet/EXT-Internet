@@ -1,7 +1,7 @@
 {
   "name": "EXT-Internet",
-  "version": "0.0.1",
-  "rev": "develop",
+  "version": "1.0.0",
+  "rev": "220210",
   "description": "An embedded Internet connexion checker on MagicMirror.",
   "main": "EXT-Internet.js",
   "scripts": {
@@ -11,19 +11,19 @@
   "keywords": [
     "magic mirror",
     "module",
-    "notification",
+    "internet",
     "warning"
   ],
   "author": "bugsounet",
   "license": "MIT",
   "bugs": {
-    "url": "http://forum.bugsounet.fr"
+    "url": "https://forum.bugsounet.fr"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/bugsounet/EXT-Internet"
   },
-  "homepage": "http://wiki.bugsounet.fr/en/EXT-Internet",
+  "homepage": "https://wiki.bugsounet.fr/en/EXT-Internet",
   "dependencies": {
     "@bugsounet/internet": "^1.1.1"
   }

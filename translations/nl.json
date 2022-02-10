@@ -1,0 +1,5 @@
+{
+  "InternetDown" : "{VALUES}, Internet is UIT!",
+  "InternetRestart": "Internet is nu beschikbaar! Herstart MagicMirror...",
+  "InternetAvailable": "Internet is nu BESCHIKBAAR, na {VALUES}"
+}

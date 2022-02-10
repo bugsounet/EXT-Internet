@@ -1,0 +1,5 @@
+{
+  "InternetDown" : "{VALUES}, Internet è DOWN!",
+  "InternetRestart": "Internet è ora connesso! Riavvio MagicMirror...",
+  "InternetAvailable": "Internet è ora connesso, dopo {VALUES}"
+}

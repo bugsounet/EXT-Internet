@@ -22,7 +22,6 @@ module.exports = NodeHelper.create({
   initialize: async function (config) {
     this.config = config
     if (this.config.debug) logINTERNET = (...args) => { console.log("[INTERNET]", ...args) }
-    logINTERNET("Starting Internet module...")
     this.internet = new internet(
       this.config,
       (noti, params) => {
