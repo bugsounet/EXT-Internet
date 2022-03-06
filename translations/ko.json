@@ -1,5 +1,14 @@
 {
   "InternetDown" : "{VALUES}, 인터넷 연결이 끊겼습니다!",
   "InternetRestart": "인터넷이 연결되었습니다! MagicMirror를 다시 시작하는중...",
-  "InternetAvailable": "인터넷이 연결되었습니다, after {VALUES}"
+  "InternetAvailable": "인터넷이 연결되었습니다, after {VALUES}",
+
+  "DAY" : "일",
+  "DAYS" : "매일",
+  "HOUR" : "시",
+  "HOURS" : "매시",
+  "MINUTE" : "분",
+  "MINUTES" : "매분",
+  "SECOND": "초",
+  "SECONDS": "매초"
 }

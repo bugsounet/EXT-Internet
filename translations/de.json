@@ -1,5 +1,14 @@
 {
   "InternetDown" : "{VALUES}, Internet ist nicht erreichbar!",
   "InternetRestart": "Internet ist jetzt verfügbar! Starte MagicMirror neu…",
-  "InternetAvailable": "Internet ist jetzt verfügbar, nach {VALUES}"
+  "InternetAvailable": "Internet ist jetzt verfügbar, nach {VALUES}",
+
+  "DAY" : "Tag",
+  "DAYS" : "Tage",
+  "HOUR" : "Stunde",
+  "HOURS" : "Stunden",
+  "MINUTE" : "Minute",
+  "MINUTES" : "Minuten",
+  "SECOND": "Sekunde",
+  "SECONDS": "Sekunden"
 }
