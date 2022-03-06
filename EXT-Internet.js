@@ -7,7 +7,7 @@
  
 Module.register("EXT-Internet", {
   defaults: {
-    debug: true,
+    debug: false,
     displayPing: true,
     delay: 30 * 1000,
     scan: "google.fr",
@@ -84,6 +84,7 @@ Module.register("EXT-Internet", {
         let FormatedSince = moment(payload.date).fromNow()
         if (payload.ticks == 1) {
           this.sendNotification("EXT_SCREEN-WAKEUP")
+          this.sendNotification("EXT_INTERNET-DOWN")
           this.sendNotification("EXT_ALERT", {
             type: "warning",
             message: this.translate("InternetDown", { VALUES: FormatedSince }),
@@ -110,6 +111,7 @@ Module.register("EXT-Internet", {
       case "INTERNET_AVAILABLE":
         let DateDiff = payload
         this.sendNotification("EXT_SCREEN-WAKEUP")
+        this.sendNotification("EXT_INTERNET-UP")
         // sport time ! translate the time elapsed since no internet into all languages !!!
         let FormatedMessage = (DateDiff.day ? (DateDiff.day + (DateDiff.day > 1 ? this.DateTranslate.days : this.DateTranslate.day)) : "")
           + (DateDiff.hour ? (DateDiff.hour + (DateDiff.hour > 1 ? this.DateTranslate.hours : this.DateTranslate.hour)): "")
