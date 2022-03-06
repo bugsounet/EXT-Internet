@@ -5,10 +5,6 @@
  ** support: https://forum.bugsounet.fr
  **/
  
- // @todo: notification & translate
-
-logNOTI = (...args) => { /* do nothing */ }
-
 Module.register("EXT-Internet", {
   defaults: {
     debug: true,
@@ -22,7 +18,6 @@ Module.register("EXT-Internet", {
   },
 
   start: function () {
-    if (this.config.debug) logINTERNET = (...args) => { console.log("[INTERNET]", ...args) }
     this.DateTranslate = {
       day: " " + this.translate("DAY") + " ",
       days: " " + this.translate("DAYS") + " ",
@@ -71,7 +66,7 @@ Module.register("EXT-Internet", {
     return internet
   },
 
-  notificationReceived: function(noti, payload) {
+  notificationReceived: function(noti, payload, sender) {
     switch(noti) {
       case "DOM_OBJECTS_CREATED":
         this.sendSocketNotification("INIT", this.config)
@@ -86,14 +81,24 @@ Module.register("EXT-Internet", {
     switch(noti) {
       /** new internet module (v2) **/
       case "INTERNET_DOWN":
-        if (payload.ticks == 1) this.sendNotification("EXT_SCREEN-WAKEUP")
         let FormatedSince = moment(payload.date).fromNow()
-        this.sendNotification("EXT_ALERT", {
-          type: "warning",
-          message: this.translate("InternetDown", { VALUES: FormatedSince }),
-          icon: "modules/EXT-Internet/resources/Internet-Logo.png",
-          timer: 10000
-        })
+        if (payload.ticks == 1) {
+          this.sendNotification("EXT_SCREEN-WAKEUP")
+          this.sendNotification("EXT_ALERT", {
+            type: "warning",
+            message: this.translate("InternetDown", { VALUES: FormatedSince }),
+            icon: "modules/EXT-Internet/resources/Internet-Logo.png",
+            timer: 10000
+          })
+        } else {
+          this.sendNotification("EXT_ALERT", {
+            type: "warning",
+            message: this.translate("InternetDown", { VALUES: FormatedSince }),
+            icon: "modules/EXT-Internet/resources/Internet-Logo.png",
+            timer: 10000,
+            sound: "none"
+          })
+        }
         break
       case "INTERNET_RESTART":
         this.sendNotification("EXT_SCREEN-WAKEUP")

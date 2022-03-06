@@ -1,5 +1,14 @@
 {
   "InternetDown" : "{VALUES}, Internet is UIT!",
   "InternetRestart": "Internet is nu beschikbaar! Herstart MagicMirror...",
-  "InternetAvailable": "Internet is nu BESCHIKBAAR, na {VALUES}"
+  "InternetAvailable": "Internet is nu BESCHIKBAAR, na {VALUES}",
+
+  "DAY" : "dag",
+  "DAYS" : "dagen",
+  "HOUR" : "uur",
+  "HOURS" : "uren",
+  "MINUTE" : "minuut",
+  "MINUTES" : "minuten",
+  "SECOND": "second",
+  "SECONDS": "seconden"
 }
