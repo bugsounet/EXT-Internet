@@ -3,7 +3,7 @@
 var NodeHelper = require("node_helper")
 var logINTERNET = (...args) => { /* do nothing */ }
 
-const internet = require("@bugsounet/internet")
+const internet = require("./lib/InternetLib.js")
 
 module.exports = NodeHelper.create({
   start: function () {
