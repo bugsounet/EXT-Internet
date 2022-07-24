@@ -1,0 +1,15 @@
+{
+  "InternetDown" : "{VALUES}, Η σύνδεση διακόπηκε!",
+  "InternetRestart": "Η σύνδεση αποκαταστάθηκε! Επανεκκίνηση του MagicMirror...",
+  "InternetAvailable": "Η σύνδεση αποκαταστάθηκε, μετά {VALUES}",
+
+  "DAY" : "Ημέρα",
+  "DAYS" : "Ημέρες",
+  "HOUR" : "Ώρα",
+  "HOURS" : "Ώρες",
+  "MINUTE" : "Λεπτό",
+  "MINUTES" : "Λεπτά",
+  "SECOND": "Δευτερόλεπτο",
+  "SECONDS": "Δευτερόλεπτα"
+}
+
