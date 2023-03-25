@@ -69,11 +69,11 @@ Module.register("EXT-Internet", {
 
   notificationReceived: function(noti, payload, sender) {
     switch(noti) {
-      case "DOM_OBJECTS_CREATED":
-        this.sendSocketNotification("INIT", this.config)
-        break
-      case "GAv5_READY":
-        if (sender.name == "MMM-GoogleAssistant") this.sendNotification("EXT_HELLO", this.name)
+      case "GW_READY":
+        if (sender.name == "Gateway") {
+          this.sendSocketNotification("INIT", this.config)
+          this.sendNotification("EXT_HELLO", this.name)
+        }
         break
     }
   },
@@ -138,20 +138,5 @@ Module.register("EXT-Internet", {
         })
         break
     }   
-  },
-
-  /** internet utils **/
-  dateDiff: function (date1, date2) {
-    var diff = {}
-    var tmp = date2 - date1
-    tmp = Math.floor(tmp/1000)
-    diff.sec = tmp % 60
-    tmp = Math.floor((tmp-diff.sec)/60)
-    diff.min = tmp % 60
-    tmp = Math.floor((tmp-diff.min)/60)
-    diff.hour = tmp % 24
-    tmp = Math.floor((tmp-diff.hour)/24)
-    diff.day = tmp
-    return diff
-  },
+  }
 })

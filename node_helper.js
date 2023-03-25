@@ -1,9 +1,7 @@
 "use strict"
 
 var NodeHelper = require("node_helper")
-var logINTERNET = (...args) => { /* do nothing */ }
-
-const internet = require("./lib/InternetLib.js")
+const internet = require("./components/InternetLib.js")
 
 module.exports = NodeHelper.create({
   start: function () {
@@ -21,15 +19,7 @@ module.exports = NodeHelper.create({
 
   initialize: async function (config) {
     this.config = config
-    if (this.config.debug) logINTERNET = (...args) => { console.log("[INTERNET]", ...args) }
-    this.internet = new internet(
-      this.config,
-      (noti, params) => {
-        this.sendSocketNotification(noti, params)
-      },
-      this.config.debug
-    )
+    this.internet = new internet( this.config, (noti, params) => { this.sendSocketNotification(noti, params) }, this.config.debug )
     this.internet.start()
   }
-
 })
