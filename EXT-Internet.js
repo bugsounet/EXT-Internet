@@ -1,7 +1,7 @@
 /**
  ** Module : EXT-Internet
  ** @bugsounet
- ** ©03-2022
+ ** ©07-2022
  ** support: https://forum.bugsounet.fr
  **/
  
@@ -11,7 +11,6 @@ Module.register("EXT-Internet", {
     displayPing: true,
     delay: 30 * 1000,
     scan: "google.fr",
-    command: "pm2 restart 0",
     showAlert: true,
     needRestart: false,
     language: config.language
@@ -46,7 +45,8 @@ Module.register("EXT-Internet", {
       nl: "translations/nl.json",
       pt: "translations/pt.json",
       ko: "translations/ko.json",
-      el: "translations/el.json"
+      el: "translations/el.json",
+      "zh-cn": "translations/zh.cn.json"
     }
   },
 

@@ -1,0 +1,14 @@
+{
+  "InternetDown" : "{VALUES}, 互联网已关闭!",
+  "InternetRestart": "互联网现已可用！ 重新启动魔镜...",
+  "InternetAvailable": "互联网现已可用, 在 {VALUES} 之后",
+
+  "DAY" : "天",
+  "DAYS" : "天",
+  "HOUR" : "小时",
+  "HOURS" : "小时",
+  "MINUTE" : "分钟",
+  "MINUTES" : "分钟",
+  "SECOND": "秒",
+  "SECONDS": "秒"
+}
