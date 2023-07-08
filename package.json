@@ -1,7 +1,7 @@
 {
   "name": "EXT-Internet",
-  "version": "1.1.0",
-  "rev": "230325",
+  "version": "1.2.0",
+  "rev": "230708",
   "description": "An embedded Internet connexion checker on MagicMirror.",
   "main": "EXT-Internet.js",
   "scripts": {
@@ -17,6 +17,9 @@
     "internet",
     "warning"
   ],
+  "engines": {
+    "node": ">=16.14.0"
+  },
   "author": "bugsounet",
   "license": "MIT",
   "bugs": {
@@ -28,11 +31,9 @@
   },
   "homepage": "https://wiki.bugsounet.fr/en/EXT-Internet",
   "dependencies": {
-    "check-node-version": "^4.2.1",
-    "child_process": "^1.0.2",
-    "glob": "^9.3.2",
+    "glob": "^10.3.1",
     "minify": "^9.2.0",
-    "moment": "^2.29.1",
-    "ping": "^0.2.3"
+    "ping": "^0.2.3",
+    "pm2": "^5.3.0"
   }
 }

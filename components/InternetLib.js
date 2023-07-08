@@ -1,9 +1,10 @@
 /** internet scan
 /** bugsounet **/
 
-const exec = require('child_process').exec
+const childProcess = require('child_process')
 const ping = require('ping')
 const moment = require('moment')
+const pm2 = require("pm2")
 var logINTERNET = (...args) => { /* do nothing */ }
 
 class INTERNET {
@@ -29,12 +30,18 @@ class INTERNET {
     }
     this.interval = null
     moment.locale(this.config.language)
+    this.usePM2 = false
+    this.PM2 = null
+    this.version = global.version
+    this.root_path = global.root_path
     console.log("[INTERNET] Internet library initialized...")
   }
 
-  start () {
+  async start () {
+    this.usePM2 = await this.check_PM2_Process()
     logINTERNET("Scan Start")
     this.internet.running = true
+    this.internetStatus()
     this.startScan()
   }
 
@@ -49,15 +56,11 @@ class INTERNET {
     if (!this.internet.running) return
     clearInterval(this.interval)
     this.interval = null
-    this.counter = this.config.delay
     this.interval = setInterval(()=> {
-      this.counter -= 1000
-      if (this.counter <= 0) {
-        clearInterval(this.interval);
-        this.interval = null
-        this.internetStatus()
-      }
-    }, 1000);
+      clearInterval(this.interval);
+      this.interval = null
+      this.internetStatus()
+    }, this.config.delay);
   }
 
   internetStatus () {
@@ -86,7 +89,7 @@ class INTERNET {
         this.callback("INTERNET_PING", "Available")
         var DateDiff = {}
         DateDiff = this.dateDiff(this.internet.date, available)
-        console.log("[ALERT] Internet is now AVAILABLE -- After " 
+        console.log("[INTERNET] [ALERT] Internet is now AVAILABLE -- After "
           + (DateDiff.day ? DateDiff.day + " days " : "")
           + (DateDiff.hour ? DateDiff.hour + " hours " : "")
           + (DateDiff.min ? DateDiff.min + " minutes " : "")
@@ -95,16 +98,8 @@ class INTERNET {
         this.internet.ticks = 0
         if (this.config.needRestart) {
           if (this.config.showAlert) this.callback("INTERNET_RESTART")
-          logINTERNET("Execute your restart command in 5 secs")
-          setTimeout (() => {
-            exec (this.config.command, (e,stdo,stde) => {
-              if (e) {
-                this.callback("WARNING", "[INTERNET] I can't restart MagicMirror")
-                console.log ("[INTERNET] " + e)
-                this.startScan() // restart scan ...
-              }
-            })
-          }, 5000)
+          logINTERNET("I will restart in 5 secs")
+          setTimeout (() => { this.restart() }, 5000)
         }
         else {
           if (this.config.showAlert) this.callback("INTERNET_AVAILABLE", DateDiff)
@@ -131,6 +126,50 @@ class INTERNET {
     tmp = Math.floor((tmp-diff.hour)/24)
     diff.day = tmp
     return diff
+  }
+
+  check_PM2_Process() {
+    return new Promise(resolve => {
+      pm2.connect(err=> {
+        if (err) {
+          console.error("[INTERNET] [PM2]", err)
+          resolve(false)
+        }
+        pm2.list((err, list) => {
+          if (err) {
+            console.error("[INTERNET] [PM2]", err)
+            resolve(false)
+          }
+          list.forEach(pm => {
+            if ((pm.pm2_env.version === this.version) && (pm.pm2_env.status === "online") && (pm.pm2_env.PWD.includes(this.root_path))) {
+              this.PM2 = pm.name
+              console.log("[INTERNET] [PM2] You are using pm2 with", this.PM2)
+              resolve(true)
+            }
+          })
+          pm2.disconnect()
+          if (!this.PM2) resolve(false)
+        })
+      })
+    })
+  }
+
+  restart() {
+    console.log("[INTERNET] Restarting MagicMirror...")
+    if (this.usePM2) {
+      pm2.restart(this.PM2, (err, proc) => {
+        if (err) {
+          console.error("[INTERNET] [PM2]" + err)
+          this.callback("WARNING", "[INTERNET] I can't restart MagicMirror")
+        }
+      })
+    } else {
+      const out = process.stdout
+      const err = process.stderr
+      const subprocess = childProcess.spawn("npm start", {cwd: this.root_path, shell: true, detached: true , stdio: [ 'ignore', out, err ]})
+      subprocess.unref()
+      process.exit()
+    }
   }
 }
 
