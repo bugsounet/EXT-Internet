@@ -18,10 +18,12 @@ Installer_dir="$(Installer_get_current_dir)"
 
 # move to installler directory
 cd "$Installer_dir"
-
 source utils.sh
+
+# Go back to module root
 cd ..
 
+echo
 # check version in package.json file
 Installer_version="$(grep -Eo '\"version\"[^,]*' ./package.json | grep -Eo '[^:]*$' | awk  -F'\"' '{print $2}')"
 Installer_module="$(grep -Eo '\"name\"[^,]*' ./package.json | grep -Eo '[^:]*$' | awk  -F'\"' '{print $2}')"
@@ -37,20 +39,7 @@ if [ "$EUID" -eq 0 ]; then
   exit 1
 fi
 
-# Check platform compatibility
-Installer_info "Checking OS..."
-Installer_checkOS
-if  [ "$platform" == "osx" ]; then
-  Installer_error "OS Detected: $OSTYPE ($os_name $os_version $arch)"
-  Installer_error "This module is not compatible with your system"
-  exit 0
-else
-  Installer_success "OS Detected: $OSTYPE ($os_name $os_version $arch)"
-fi
-
 echo
-
-# deleting package.json because npm install add/update package
 rm -f package-lock.json
 
 Installer_info "Updating..."
