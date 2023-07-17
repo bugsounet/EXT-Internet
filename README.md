@@ -1,4 +1,4 @@
-# EXT-Internet - Extented for `MMM-GoogleAssistant` v5.x
+# EXT-Internet - Extented for `MMM-GoogleAssistant`
 
 EXT-Internet is a module for the [MagicMirror](https://github.com/MichMich/MagicMirror) project by [Michael Teeuw](https://github.com/MichMich).<br>
 
