@@ -31,7 +31,7 @@
   },
   "homepage": "https://wiki.bugsounet.fr/en/EXT-Internet",
   "dependencies": {
-    "esbuild": "^0.18.15",
+    "esbuild": "^0.18.16",
     "glob": "^10.3.3",
     "ping": "^0.4.4",
     "pm2": "^5.3.0"
