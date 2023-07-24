@@ -1,12 +1,12 @@
 {
   "name": "EXT-Internet",
-  "version": "1.2.2",
-  "rev": "230717",
+  "version": "1.2.3",
+  "rev": "230724",
   "description": "An embedded Internet connexion checker on MagicMirror.",
   "main": "EXT-Internet.js",
   "scripts": {
     "preinstall": "installer/preinstall.sh",
-    "postinstall": "installer/postinstall.sh",
+    "postinstall": "installer/postinstall.sh -m -b",
     "update": "installer/update.sh",
     "reset": "git reset --hard",
     "clean": "rm -rf node_modules package-lock.json"
@@ -31,7 +31,7 @@
   },
   "homepage": "https://wiki.bugsounet.fr/en/EXT-Internet",
   "dependencies": {
-    "esbuild": "^0.18.15",
+    "esbuild": "^0.18.16",
     "glob": "^10.3.3",
     "ping": "^0.4.4",
     "pm2": "^5.3.0"
