@@ -4,7 +4,6 @@
 const childProcess = require('child_process')
 const ping = require('ping')
 const moment = require('moment')
-const pm2 = require("pm2")
 var logINTERNET = (...args) => { /* do nothing */ }
 
 class INTERNET {
@@ -38,7 +37,6 @@ class INTERNET {
   }
 
   async start () {
-    this.usePM2 = await this.check_PM2_Process()
     logINTERNET("Scan Start")
     this.internet.running = true
     this.internetStatus()
@@ -99,7 +97,7 @@ class INTERNET {
         if (this.config.needRestart) {
           if (this.config.showAlert) this.callback("INTERNET_RESTART")
           logINTERNET("I will restart in 5 secs")
-          setTimeout (() => { this.restart() }, 5000)
+          setTimeout (() => { this.callback("RESTART") }, 5000)
         }
         else {
           if (this.config.showAlert) this.callback("INTERNET_AVAILABLE", DateDiff)
@@ -126,50 +124,6 @@ class INTERNET {
     tmp = Math.floor((tmp-diff.hour)/24)
     diff.day = tmp
     return diff
-  }
-
-  check_PM2_Process() {
-    return new Promise(resolve => {
-      pm2.connect(err=> {
-        if (err) {
-          console.error("[INTERNET] [PM2]", err)
-          resolve(false)
-        }
-        pm2.list((err, list) => {
-          if (err) {
-            console.error("[INTERNET] [PM2]", err)
-            resolve(false)
-          }
-          list.forEach(pm => {
-            if ((pm.pm2_env.version === this.version) && (pm.pm2_env.status === "online") && (pm.pm2_env.PWD.includes(this.root_path))) {
-              this.PM2 = pm.name
-              console.log("[INTERNET] [PM2] You are using pm2 with", this.PM2)
-              resolve(true)
-            }
-          })
-          pm2.disconnect()
-          if (!this.PM2) resolve(false)
-        })
-      })
-    })
-  }
-
-  restart() {
-    console.log("[INTERNET] Restarting MagicMirror...")
-    if (this.usePM2) {
-      pm2.restart(this.PM2, (err, proc) => {
-        if (err) {
-          console.error("[INTERNET] [PM2]" + err)
-          this.callback("WARNING", "[INTERNET] I can't restart MagicMirror")
-        }
-      })
-    } else {
-      const out = process.stdout
-      const err = process.stderr
-      const subprocess = childProcess.spawn("npm start", {cwd: this.root_path, shell: true, detached: true , stdio: [ 'ignore', out, err ]})
-      subprocess.unref()
-      process.exit()
-    }
   }
 }
 

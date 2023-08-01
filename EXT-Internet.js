@@ -137,6 +137,9 @@ Module.register("EXT-Internet", {
           timer: 10000
         })
         break
+      case "RESTART":
+        this.sendNotification("EXT_GATEWAY-Restart")
+        break
     }   
   }
 })
