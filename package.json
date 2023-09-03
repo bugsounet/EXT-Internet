@@ -32,7 +32,7 @@
   "homepage": "https://wiki.bugsounet.fr/en/EXT-Internet",
   "dependencies": {
     "esbuild": "^0.19.2",
-    "glob": "^10.3.3",
+    "glob": "^10.3.4",
     "ping": "^0.4.4"
   }
 }
