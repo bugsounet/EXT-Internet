@@ -1,0 +1,14 @@
+{
+  "InternetDown" : "{VALUES}, İnternet KAPALI!",
+  "InternetRestart": "İnternet artık mevcut! Sihirli Ayna yeniden başlatılıyor...",
+  "InternetAvailable": "İnternet artık MEVCUT, sonra {VALUES}",
+
+  "DAY" : "Gün",
+  "DAYS" : "Gün(ler)",
+  "HOUR" : "Saat",
+  "HOURS" : "Saat(ler)",
+  "MINUTE" : "Dakika",
+  "MINUTES" : "Dakika(lar)",
+  "SECOND": "Saniye",
+  "SECONDS": "Saniye(ler)"
+}
