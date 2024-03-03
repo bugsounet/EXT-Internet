@@ -1,7 +1,7 @@
 {
   "name": "EXT-Internet",
-  "version": "1.5.0",
-  "rev": "240225",
+  "version": "1.5.1",
+  "rev": "240303",
   "description": "An embedded Internet connexion checker on MagicMirror.",
   "main": "EXT-Internet.js",
   "scripts": {
