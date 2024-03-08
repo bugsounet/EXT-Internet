@@ -1,7 +1,7 @@
 {
   "name": "EXT-Internet",
-  "version": "1.5.0",
-  "rev": "240225",
+  "version": "1.5.1",
+  "rev": "240303",
   "description": "An embedded Internet connexion checker on MagicMirror.",
   "main": "EXT-Internet.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "test:minify": "cd installer && node minify.js"
   },
   "keywords": [
+    "MMM-GoogleAssistant",
     "magic mirror",
     "module",
     "internet",
@@ -41,7 +42,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^8.57.0",
-    "@stylistic/eslint-plugin": "^1.6.2",
+    "@stylistic/eslint-plugin": "^1.6.3",
     "eslint": "^8.57.0",
     "eslint-plugin-import": "^2.29.1"
   }
